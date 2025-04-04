@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package fitness;
+
+option go_package = "LiveisFPV.fitness.v1;fitness_v1";
+
+service Fitness{
+    rpc GetProfile (ProfileRequest) returns (ProfileResponse);
+    rpc CreateProfile (CreateProfileRequest) returns (ProfileResponse);
+    rpc UpdateProfile (UpdateProfileRequest) returns (ProfileResponse);
+}
+
+message ProfileResponse{
+    string user_birthday = 1;
+    int64 user_height = 2;
+    double user_weight = 3;
+    string user_fitness_target = 4;
+    bool user_sex = 5;
+    bool user_hypertain = 6;
+    bool user_diabet = 7;
+    int32 user_level = 8;
+}
+
+message ProfileRequest{
+    int64 user_id =1;
+}
+
+message CreateProfileRequest{
+    string user_birthday = 1;
+    int64 user_height = 2;
+    double user_weight = 3;
+    string user_fitness_target = 4;
+    bool user_sex = 5;
+    bool user_hypertain = 6;
+    bool user_diabet = 7;
+    int32 user_level = 8;
+}
+
+message UpdateProfileRequest{
+    optional string user_birthday = 1;
+    optional int64 user_height = 2;
+    optional double user_weight = 3;
+    optional string user_fitness_target = 4;
+    optional bool user_sex = 5;
+    optional bool user_hypertain = 6;
+    optional bool user_diabet = 7;
+    optional int32 user_level = 8;
+}
+/*
+For generation
+protoc -I proto proto/fitness/fitness.proto --go_out=./gen/go/ --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+-I proto way to proto file
+--go_out - where is create go-code
+--go_opt - how to create package name
+--go-grpc_out - where to create go grpc-code
+--go-grpc_opt - how to create grpc package name
+*/
