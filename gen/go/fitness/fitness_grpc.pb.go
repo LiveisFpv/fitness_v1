@@ -19,9 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Fitness_GetUser_FullMethodName    = "/fitness.Fitness/GetUser"
-	Fitness_CreateUser_FullMethodName = "/fitness.Fitness/CreateUser"
-	Fitness_UpdateUser_FullMethodName = "/fitness.Fitness/UpdateUser"
+	Fitness_GetUser_FullMethodName       = "/fitness.Fitness/GetUser"
+	Fitness_CreateUser_FullMethodName    = "/fitness.Fitness/CreateUser"
+	Fitness_UpdateUser_FullMethodName    = "/fitness.Fitness/UpdateUser"
+	Fitness_GetPlanDishes_FullMethodName = "/fitness.Fitness/GetPlanDishes"
+	Fitness_GetPlanTrain_FullMethodName  = "/fitness.Fitness/GetPlanTrain"
+	Fitness_GetHistory_FullMethodName    = "/fitness.Fitness/GetHistory"
 )
 
 // FitnessClient is the client API for Fitness service.
@@ -31,6 +34,9 @@ type FitnessClient interface {
 	GetUser(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
 	CreateUser(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
+	GetPlanDishes(ctx context.Context, in *GetPlanDishesRequest, opts ...grpc.CallOption) (*PlanDishesResponse, error)
+	GetPlanTrain(ctx context.Context, in *GetPlanTrainRequest, opts ...grpc.CallOption) (*PlanTrainResponse, error)
+	GetHistory(ctx context.Context, in *GetHistoryRequest, opts ...grpc.CallOption) (*HistoryResponse, error)
 }
 
 type fitnessClient struct {
@@ -71,6 +77,36 @@ func (c *fitnessClient) UpdateUser(ctx context.Context, in *UpdateProfileRequest
 	return out, nil
 }
 
+func (c *fitnessClient) GetPlanDishes(ctx context.Context, in *GetPlanDishesRequest, opts ...grpc.CallOption) (*PlanDishesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlanDishesResponse)
+	err := c.cc.Invoke(ctx, Fitness_GetPlanDishes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fitnessClient) GetPlanTrain(ctx context.Context, in *GetPlanTrainRequest, opts ...grpc.CallOption) (*PlanTrainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlanTrainResponse)
+	err := c.cc.Invoke(ctx, Fitness_GetPlanTrain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fitnessClient) GetHistory(ctx context.Context, in *GetHistoryRequest, opts ...grpc.CallOption) (*HistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HistoryResponse)
+	err := c.cc.Invoke(ctx, Fitness_GetHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FitnessServer is the server API for Fitness service.
 // All implementations must embed UnimplementedFitnessServer
 // for forward compatibility.
@@ -78,6 +114,9 @@ type FitnessServer interface {
 	GetUser(context.Context, *ProfileRequest) (*ProfileResponse, error)
 	CreateUser(context.Context, *CreateProfileRequest) (*ProfileResponse, error)
 	UpdateUser(context.Context, *UpdateProfileRequest) (*ProfileResponse, error)
+	GetPlanDishes(context.Context, *GetPlanDishesRequest) (*PlanDishesResponse, error)
+	GetPlanTrain(context.Context, *GetPlanTrainRequest) (*PlanTrainResponse, error)
+	GetHistory(context.Context, *GetHistoryRequest) (*HistoryResponse, error)
 	mustEmbedUnimplementedFitnessServer()
 }
 
@@ -96,6 +135,15 @@ func (UnimplementedFitnessServer) CreateUser(context.Context, *CreateProfileRequ
 }
 func (UnimplementedFitnessServer) UpdateUser(context.Context, *UpdateProfileRequest) (*ProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedFitnessServer) GetPlanDishes(context.Context, *GetPlanDishesRequest) (*PlanDishesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlanDishes not implemented")
+}
+func (UnimplementedFitnessServer) GetPlanTrain(context.Context, *GetPlanTrainRequest) (*PlanTrainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlanTrain not implemented")
+}
+func (UnimplementedFitnessServer) GetHistory(context.Context, *GetHistoryRequest) (*HistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHistory not implemented")
 }
 func (UnimplementedFitnessServer) mustEmbedUnimplementedFitnessServer() {}
 func (UnimplementedFitnessServer) testEmbeddedByValue()                 {}
@@ -172,6 +220,60 @@ func _Fitness_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Fitness_GetPlanDishes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlanDishesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FitnessServer).GetPlanDishes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Fitness_GetPlanDishes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FitnessServer).GetPlanDishes(ctx, req.(*GetPlanDishesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fitness_GetPlanTrain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlanTrainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FitnessServer).GetPlanTrain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Fitness_GetPlanTrain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FitnessServer).GetPlanTrain(ctx, req.(*GetPlanTrainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fitness_GetHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FitnessServer).GetHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Fitness_GetHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FitnessServer).GetHistory(ctx, req.(*GetHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Fitness_ServiceDesc is the grpc.ServiceDesc for Fitness service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +292,18 @@ var Fitness_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _Fitness_UpdateUser_Handler,
+		},
+		{
+			MethodName: "GetPlanDishes",
+			Handler:    _Fitness_GetPlanDishes_Handler,
+		},
+		{
+			MethodName: "GetPlanTrain",
+			Handler:    _Fitness_GetPlanTrain_Handler,
+		},
+		{
+			MethodName: "GetHistory",
+			Handler:    _Fitness_GetHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

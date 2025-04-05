@@ -8,6 +8,9 @@ service Fitness{
     rpc GetUser (ProfileRequest) returns (ProfileResponse);
     rpc CreateUser (CreateProfileRequest) returns (ProfileResponse);
     rpc UpdateUser (UpdateProfileRequest) returns (ProfileResponse);
+    rpc GetPlanDishes (GetPlanDishesRequest) returns (PlanDishesResponse);
+    rpc GetPlanTrain (GetPlanTrainRequest) returns(PlanTrainResponse);
+    rpc GetHistory (GetHistoryRequest) returns (HistoryResponse);
 }
 
 message ProfileResponse{
@@ -50,6 +53,53 @@ message UpdateProfileRequest{
     optional string user_fitness_target = 8;
     optional bool user_sex = 9;
     optional int32 user_level = 10;
+}
+message GetPlanTrainRequest{
+    int64 user_id = 1;
+}
+message GetPlanDishesRequest{
+    int64 user_id = 1;
+}
+message PlanTrain{
+    int64 train_id = 1;
+    string train_title = 2;    
+	string train_description = 3;
+	int64 user_level = 4;
+    string date = 5;
+    int64 user_id = 6;
+}
+
+message PlanTrainResponse{
+    repeated PlanTrain data = 1;
+}
+message PlanDishes{
+    int64 dishes_id = 1;
+    double dishes_weight = 2;
+    string time = 3;
+    double kcal = 4;
+    double fat = 5;
+    double protein = 6;
+    double carbs = 7;
+    double description = 8;
+    string date = 9;
+    int64 user_id = 10;
+}
+
+message PlanDishesResponse{
+    repeated PlanDishes data = 1;
+}
+
+message GetHistoryRequest{
+    int64 user_id = 1;
+}
+
+message History{
+    double user_weight = 1;
+    string date = 2;
+}
+
+message HistoryResponse{
+    repeated History data = 1;
 }
 /*
 For generation
