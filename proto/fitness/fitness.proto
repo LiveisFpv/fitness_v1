@@ -58,9 +58,11 @@ message UpdateProfileRequest{
 }
 message GetPlanTrainRequest{
     int64 user_id = 1;
+    string date = 2;
 }
 message GetPlanDishesRequest{
     int64 user_id = 1;
+    string date = 2;
 }
 message PlanTrain{
     int64 train_id = 1;
@@ -68,7 +70,6 @@ message PlanTrain{
 	string train_description = 3;
 	int64 user_level = 4;
     string date = 5;
-    int64 user_id = 6;
 }
 
 message PlanTrainResponse{
@@ -84,7 +85,6 @@ message PlanDishes{
     double carbs = 7;
     double description = 8;
     string date = 9;
-    int64 user_id = 10;
 }
 
 message PlanDishesResponse{
@@ -93,6 +93,7 @@ message PlanDishesResponse{
 
 message GetHistoryRequest{
     int64 user_id = 1;
+    string date = 2;
 }
 
 message History{
