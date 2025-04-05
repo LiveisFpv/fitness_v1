@@ -5,9 +5,9 @@ package fitness;
 option go_package = "LiveisFPV.fitness.v1;fitness_v1";
 
 service Fitness{
-    rpc GetProfile (ProfileRequest) returns (ProfileResponse);
-    rpc CreateProfile (CreateProfileRequest) returns (ProfileResponse);
-    rpc UpdateProfile (UpdateProfileRequest) returns (ProfileResponse);
+    rpc GetUser (ProfileRequest) returns (ProfileResponse);
+    rpc CreateUser (CreateProfileRequest) returns (ProfileResponse);
+    rpc UpdateUser (UpdateProfileRequest) returns (ProfileResponse);
 }
 
 message ProfileResponse{
@@ -15,7 +15,7 @@ message ProfileResponse{
     string user_lastname = 2;
     optional string user_middlename = 3;
     string user_birthday = 4;
-    int64 user_height = 5;
+    int32 user_height = 5;
     double user_weight = 6;
     string user_fitness_target = 7;
     bool user_sex = 8;
@@ -29,17 +29,18 @@ message ProfileRequest{
 }
 
 message CreateProfileRequest{
-    string user_firstname = 1;
-    string user_lastname = 2;
-    optional string user_middlename = 3;
-    string user_birthday = 4;
-    int64 user_height = 5;
-    double user_weight = 6;
-    string user_fitness_target = 7;
-    bool user_sex = 8;
-    bool user_hypertain = 9;
-    bool user_diabet = 10;
-    optional int32 user_level = 11;
+    int64 user_id = 1;
+    string user_firstname = 2;
+    string user_lastname = 3;
+    optional string user_middlename = 4;
+    string user_birthday = 5;
+    int32 user_height = 6;
+    double user_weight = 7;
+    string user_fitness_target = 8;
+    bool user_sex = 9;
+    bool user_hypertain = 10;
+    bool user_diabet = 11;
+    optional int32 user_level = 12;
 }
 
 message UpdateProfileRequest{
@@ -48,7 +49,7 @@ message UpdateProfileRequest{
     optional string user_lastname = 3;
     optional string user_middlename = 4;
     optional string user_birthday = 5;
-    optional int64 user_height = 6;
+    optional int32 user_height = 6;
     optional double user_weight = 7;
     optional string user_fitness_target = 8;
     optional bool user_sex = 9;

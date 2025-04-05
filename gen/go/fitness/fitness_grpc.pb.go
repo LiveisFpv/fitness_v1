@@ -19,18 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Fitness_GetProfile_FullMethodName    = "/fitness.Fitness/GetProfile"
-	Fitness_CreateProfile_FullMethodName = "/fitness.Fitness/CreateProfile"
-	Fitness_UpdateProfile_FullMethodName = "/fitness.Fitness/UpdateProfile"
+	Fitness_GetUser_FullMethodName    = "/fitness.Fitness/GetUser"
+	Fitness_CreateUser_FullMethodName = "/fitness.Fitness/CreateUser"
+	Fitness_UpdateUser_FullMethodName = "/fitness.Fitness/UpdateUser"
 )
 
 // FitnessClient is the client API for Fitness service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FitnessClient interface {
-	GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
-	CreateProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
-	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
+	GetUser(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
+	CreateUser(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
+	UpdateUser(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
 }
 
 type fitnessClient struct {
@@ -41,30 +41,30 @@ func NewFitnessClient(cc grpc.ClientConnInterface) FitnessClient {
 	return &fitnessClient{cc}
 }
 
-func (c *fitnessClient) GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
+func (c *fitnessClient) GetUser(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProfileResponse)
-	err := c.cc.Invoke(ctx, Fitness_GetProfile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Fitness_GetUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *fitnessClient) CreateProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
+func (c *fitnessClient) CreateUser(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProfileResponse)
-	err := c.cc.Invoke(ctx, Fitness_CreateProfile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Fitness_CreateUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *fitnessClient) UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
+func (c *fitnessClient) UpdateUser(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProfileResponse)
-	err := c.cc.Invoke(ctx, Fitness_UpdateProfile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Fitness_UpdateUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,9 +75,9 @@ func (c *fitnessClient) UpdateProfile(ctx context.Context, in *UpdateProfileRequ
 // All implementations must embed UnimplementedFitnessServer
 // for forward compatibility.
 type FitnessServer interface {
-	GetProfile(context.Context, *ProfileRequest) (*ProfileResponse, error)
-	CreateProfile(context.Context, *CreateProfileRequest) (*ProfileResponse, error)
-	UpdateProfile(context.Context, *UpdateProfileRequest) (*ProfileResponse, error)
+	GetUser(context.Context, *ProfileRequest) (*ProfileResponse, error)
+	CreateUser(context.Context, *CreateProfileRequest) (*ProfileResponse, error)
+	UpdateUser(context.Context, *UpdateProfileRequest) (*ProfileResponse, error)
 	mustEmbedUnimplementedFitnessServer()
 }
 
@@ -88,14 +88,14 @@ type FitnessServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFitnessServer struct{}
 
-func (UnimplementedFitnessServer) GetProfile(context.Context, *ProfileRequest) (*ProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
+func (UnimplementedFitnessServer) GetUser(context.Context, *ProfileRequest) (*ProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedFitnessServer) CreateProfile(context.Context, *CreateProfileRequest) (*ProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateProfile not implemented")
+func (UnimplementedFitnessServer) CreateUser(context.Context, *CreateProfileRequest) (*ProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedFitnessServer) UpdateProfile(context.Context, *UpdateProfileRequest) (*ProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
+func (UnimplementedFitnessServer) UpdateUser(context.Context, *UpdateProfileRequest) (*ProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 func (UnimplementedFitnessServer) mustEmbedUnimplementedFitnessServer() {}
 func (UnimplementedFitnessServer) testEmbeddedByValue()                 {}
@@ -118,56 +118,56 @@ func RegisterFitnessServer(s grpc.ServiceRegistrar, srv FitnessServer) {
 	s.RegisterService(&Fitness_ServiceDesc, srv)
 }
 
-func _Fitness_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Fitness_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FitnessServer).GetProfile(ctx, in)
+		return srv.(FitnessServer).GetUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Fitness_GetProfile_FullMethodName,
+		FullMethod: Fitness_GetUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FitnessServer).GetProfile(ctx, req.(*ProfileRequest))
+		return srv.(FitnessServer).GetUser(ctx, req.(*ProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Fitness_CreateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Fitness_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FitnessServer).CreateProfile(ctx, in)
+		return srv.(FitnessServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Fitness_CreateProfile_FullMethodName,
+		FullMethod: Fitness_CreateUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FitnessServer).CreateProfile(ctx, req.(*CreateProfileRequest))
+		return srv.(FitnessServer).CreateUser(ctx, req.(*CreateProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Fitness_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Fitness_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FitnessServer).UpdateProfile(ctx, in)
+		return srv.(FitnessServer).UpdateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Fitness_UpdateProfile_FullMethodName,
+		FullMethod: Fitness_UpdateUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FitnessServer).UpdateProfile(ctx, req.(*UpdateProfileRequest))
+		return srv.(FitnessServer).UpdateUser(ctx, req.(*UpdateProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -180,16 +180,16 @@ var Fitness_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*FitnessServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetProfile",
-			Handler:    _Fitness_GetProfile_Handler,
+			MethodName: "GetUser",
+			Handler:    _Fitness_GetUser_Handler,
 		},
 		{
-			MethodName: "CreateProfile",
-			Handler:    _Fitness_CreateProfile_Handler,
+			MethodName: "CreateUser",
+			Handler:    _Fitness_CreateUser_Handler,
 		},
 		{
-			MethodName: "UpdateProfile",
-			Handler:    _Fitness_UpdateProfile_Handler,
+			MethodName: "UpdateUser",
+			Handler:    _Fitness_UpdateUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
