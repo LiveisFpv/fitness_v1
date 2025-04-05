@@ -19,9 +19,7 @@ message ProfileResponse{
     double user_weight = 6;
     string user_fitness_target = 7;
     bool user_sex = 8;
-    bool user_hypertain = 9;
-    bool user_diabet = 10;
-    optional int32 user_level = 11;
+    optional int32 user_level = 9;
 }
 
 message ProfileRequest{
@@ -38,9 +36,7 @@ message CreateProfileRequest{
     double user_weight = 7;
     string user_fitness_target = 8;
     bool user_sex = 9;
-    bool user_hypertain = 10;
-    bool user_diabet = 11;
-    optional int32 user_level = 12;
+    optional int32 user_level = 10;
 }
 
 message UpdateProfileRequest{
@@ -53,9 +49,7 @@ message UpdateProfileRequest{
     optional double user_weight = 7;
     optional string user_fitness_target = 8;
     optional bool user_sex = 9;
-    optional bool user_hypertain = 10;
-    optional bool user_diabet = 11;
-    optional int32 user_level = 12;
+    optional int32 user_level = 10;
 }
 /*
 For generation
