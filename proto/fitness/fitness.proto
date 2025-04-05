@@ -11,6 +11,8 @@ service Fitness{
     rpc GetPlanDishes (GetPlanDishesRequest) returns (PlanDishesResponse);
     rpc GetPlanTrain (GetPlanTrainRequest) returns(PlanTrainResponse);
     rpc GetHistory (GetHistoryRequest) returns (HistoryResponse);
+    rpc GetTrainInstr (GetTrainInstrRequest) returns (TrainInstrResponse);
+    rpc GetRecipe (GetRecipeRequest) returns (RecipeResponse);
 }
 
 message ProfileResponse{
@@ -100,6 +102,26 @@ message History{
 
 message HistoryResponse{
     repeated History data = 1;
+}
+
+message GetTrainInstrRequest{
+    int64 train_id = 1;
+}
+
+message GetRecipeRequest{
+    int64 dishes_id = 1;
+}
+
+message TrainInstrResponse{
+    int64 training_order = 1;
+    string training_instr = 2;
+    string  training_img = 3;
+}
+
+message RecipeResponse{
+    int64 recipe_order = 1;
+    string recipe_instruct = 2;
+    string  recipe_img = 3;
 }
 /*
 For generation
