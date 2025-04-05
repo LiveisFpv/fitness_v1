@@ -112,16 +112,24 @@ message GetRecipeRequest{
     int64 dishes_id = 1;
 }
 
-message TrainInstrResponse{
+message TrainInstr{
     int64 training_order = 1;
     string training_instr = 2;
     string  training_img = 3;
 }
 
-message RecipeResponse{
+message TrainInstrResponse{
+    repeated TrainInstr data = 1;
+}
+
+message Recipe{
     int64 recipe_order = 1;
     string recipe_instruct = 2;
     string  recipe_img = 3;
+}
+
+message RecipeResponse{
+    repeated Recipe data = 1;
 }
 /*
 For generation
