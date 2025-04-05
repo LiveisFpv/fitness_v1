@@ -19,7 +19,7 @@ message ProfileResponse{
     double user_weight = 6;
     string user_fitness_target = 7;
     bool user_sex = 8;
-    optional int32 user_level = 9;
+    int32 user_level = 9;
 }
 
 message ProfileRequest{
