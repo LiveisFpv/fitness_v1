@@ -84,7 +84,7 @@ message PlanDishes{
     double fat = 6;
     double protein = 7;
     double carbs = 8;
-    double description = 9;
+    string description = 9;
     string date = 10;
 }
 
