@@ -78,13 +78,14 @@ message PlanTrainResponse{
 message PlanDishes{
     int64 dishes_id = 1;
     double dishes_weight = 2;
-    string time = 3;
-    double kcal = 4;
-    double fat = 5;
-    double protein = 6;
-    double carbs = 7;
-    double description = 8;
-    string date = 9;
+    string dishes_title = 3;
+    string time = 4;
+    double kcal = 5;
+    double fat = 6;
+    double protein = 7;
+    double carbs = 8;
+    double description = 9;
+    string date = 10;
 }
 
 message PlanDishesResponse{
